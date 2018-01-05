@@ -13,6 +13,18 @@ public class StoreObject {
 		itemName = argItemName;
 		storePrice = argStorePrice;
 		retailPrice = argRetailPrice;
+		discount = 0;
+		subtotal = (1-discount) * retailPrice;
+		tax = .07 * subtotal;
+		customerCost = subtotal + tax;
+		profit = subtotal - storePrice;
+	}
+	
+	public StoreObject (String argItemName, double argStorePrice, double argRetailPrice, double argDiscount) {
+		itemName = argItemName;
+		storePrice = argStorePrice;
+		retailPrice = argRetailPrice;
+		discount = argDiscount;
 		subtotal = (1-discount) * retailPrice;
 		tax = .07 * subtotal;
 		customerCost = subtotal + tax;
