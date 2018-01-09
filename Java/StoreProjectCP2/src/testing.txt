@@ -1,14 +1,21 @@
-Game1
+Game
+Mario
 10.0
 20.0
-PC
-Microsoft
+Switch
+Nintendo
 ..
-Console1
+Console
+Switch
 80.0
 150.0
+Nintendo
+Hybrid
 ..
-Controller1
+Controller
+Pro Controller
 5.0
 10.0
+Switch
+Nintendo
 ..
