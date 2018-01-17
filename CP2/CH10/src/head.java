@@ -24,6 +24,7 @@ public class head {
 			break;
 		default:
 			System.out.println("You didn't enter a valid command.");
+			s.close();
 			return;
 		}
 		
@@ -33,11 +34,13 @@ public class head {
 		if (s.hasNextDouble()) op1 = s.nextDouble();
 		else {
 			System.out.println("You didn't enter a valid number.");
+			s.close();
 			return;
 		}
 		if (s.hasNextDouble()) op2 = s.nextDouble();
 		else {
 			System.out.println("You didn't enter a valid number.");
+			s.close();
 			return;
 		}
 		

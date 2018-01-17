@@ -1,4 +1,3 @@
-
 public class StoreObject {
 	String itemName;
 	double tax;

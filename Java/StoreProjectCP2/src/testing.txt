@@ -1,21 +1,34 @@
 Game
-Mario
-10.0
-20.0
-Switch
+Super Mario Odyssey
+40.0
+60.0
+Nintendo Switch
 Nintendo
+3D Platformer
+true
+true
+..
+Game
+The Legend of Zelda: Breath of the Wild
+40.0
+60.0
+Nintendo Switch
+Nintendo
+Action Adventure
+false
+false
 ..
 Console
 Switch
-80.0
-150.0
+200.0
+300.0
 Nintendo
 Hybrid
 ..
 Controller
 Pro Controller
-5.0
-10.0
-Switch
+40.0
+60.0
+Nintendo Switch
 Nintendo
 ..
