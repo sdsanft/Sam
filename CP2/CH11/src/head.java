@@ -13,6 +13,6 @@ public class head {
 			name2 += name1.substring(name1.length() - i - 1, name1.length() - i);
 		}
 		System.out.println(name2);
+		s.close();
 	}
-
 }
