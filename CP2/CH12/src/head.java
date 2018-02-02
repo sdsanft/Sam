@@ -131,5 +131,4 @@ public class head {
 		} while (i != 0);
 		s.close();
 	}
-
 }

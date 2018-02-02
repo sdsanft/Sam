@@ -1,25 +1,49 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.FileWriter;
+import java.io.PrintWriter;
 import java.util.Scanner;
+import java.util.Date;
+import java.util.ArrayList;
 public class head {
 
-	public static void main(String[] args) throws FileNotFoundException {
-		File f = new File("/H:/My Stuff/Java/StoreProject/StoreCP2Test/src/testing.txt");
-		Game[] Inventory = ScanFile(f);
+	public static void main(String[] args) throws IOException {
+		File Inv = new File("/H:/My Stuff/Java/StoreProject/StoreCP2_v0.1/src/testing.txt");
+		File Sales = new File("/H:/My Stuff/Java/StoreProject/StoreCP2_v0.1/src/Sales.txt");
+		
+		FileWriter f = new FileWriter(Sales);
+		PrintWriter p = new PrintWriter(f);
+		p.println("\t\t=====Sales=====");
+		p.close();
+		
+		Game[] Inventory = ScanFile(Inv, Sales);
 
-		for(int i = 0; i < Inventory.length; i++){
-			Game g = Inventory[i];
+		printInventory(Inventory);
+		
+		Inventory[0].sell(10, false, new Date());
+		Inventory[0].sell(10, true, new Date());
+		Inventory[0].sell(10, true, new Date());
+		System.out.println("\n");
+		
+		printInventory(Inventory);		
+	}
+	
+	public static void printInventory (Game[] inv) {
+		for(int i = 0; i < inv.length; i++){
+			Game g = inv[i];
 			System.out.println(g.itemName + ", a " + g.genre + " game by " + g.publisher + " for " + g.console);
 			if (g.stock <= 0)
 				System.out.println("    NOT IN STOCK"); 
-			System.out.println("    Price: $" + Inventory[i].retailPrice);
+			System.out.println("    Price: $" + inv[i].retailPrice);
 		}
-		System.out.println("\n");
-		
-		
 	}
 	
-	public static Game[] ScanFile(File f) throws FileNotFoundException {
+	public static boolean SaveFile(File f) {
+		return true;
+	}
+	
+ 	public static Game[] ScanFile(File f, File Sales) throws FileNotFoundException {
 		int length = 0;
 		int sections = 0;
 		
@@ -53,7 +77,7 @@ public class head {
 			s.nextLine();
 			s.nextLine();
 			
-			inv[i] = new Game(objName, objCon, objPub, objGen, objSto, objRet, objSale, objStock);
+			inv[i] = new Game(objName, objCon, objPub, objGen, objSto, objRet, objSale, objStock, Sales);
 		}
 		s.close();
 		

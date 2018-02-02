@@ -14,4 +14,11 @@
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>src/Sales.txt</name>
+			<type>1</type>
+			<location>H:/My Stuff/Java/StoreProject/StoreCP2_v0.1/src/Sales.txt</location>
+		</link>
+	</linkedResources>
 </projectDescription>

@@ -1,0 +1,9 @@
+		=====Sales=====
+Super Mario Odyssey, Nintendo Switch.
+	Sold: 10, Remaining: 10
+	Price: $60.0, Profit $20.0
+	Mon Jan 29 08:44:27 MST 2018
+Super Mario Odyssey, Nintendo Switch.
+	Sold: 10, Remaining: 0
+	Price: $45.0, Profit: $5.0
+	Mon Jan 29 08:44:27 MST 2018
