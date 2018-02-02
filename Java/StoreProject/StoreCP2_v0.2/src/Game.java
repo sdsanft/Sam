@@ -32,7 +32,7 @@ public class Game {
 		PrintWriter p = new PrintWriter(f);
 		
 		if ((argStock <= stock) && (argStock > 0)) {
-			p.println(itemName + ", " + console + ".");
+			p.println(itemName + ", " + console);
 			p.println("\tSold: " + argStock + ", Remaining: " + (stock-argStock));
 			if (sale) p.println("\tPrice: $" + salePrice + ", Profit: $" + (salePrice - storePrice));
 			else p.println("\tPrice: $" + retailPrice + ", Profit $" + (retailPrice - storePrice));

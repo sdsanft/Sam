@@ -1,1 +1,13 @@
 		=====Sales=====
+ARMS, Nintendo Switch.
+	Sold: 5, Remaining: 5
+	Price: $60.0, Profit $30.0
+	Fri Feb 02 08:53:27 MST 2018
+The Legend of Zelda: Breath of the Wild, Nintendo Switch.
+	Sold: 15, Remaining: 0
+	Price: $40.0, Profit: $5.0
+	Fri Feb 02 08:53:57 MST 2018
+Super Mario Odyssey, Nintendo Switch.
+	Sold: 10, Remaining: 10
+	Price: $60.0, Profit $20.0
+	Fri Feb 02 08:56:35 MST 2018

@@ -5,16 +5,7 @@ Nintendo
 40.0
 60.0
 45.0
-20
-..
-The Legend of Zelda: Breath of the Wild
-Nintendo Switch
-Nintendo
-Adventure
-35.0
-60.0
-40.0
-15
+10
 ..
 Splatoon 2
 Nintendo Switch
@@ -23,5 +14,23 @@ Action
 35.0
 60.0
 40.0
-0
+20
+..
+ARMS
+Nintendo Switch
+Nintendo
+Action
+35.0
+60.0
+40.0
+25
+..
+The Legend of Zelda: Breath of the Wild
+Nintendo Switch
+Nintendo
+Adventure
+35.0
+60.0
+40.0
+30
 ..
