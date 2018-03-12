@@ -1,0 +1,20 @@
+Splatoon 2, Nintendo Switch
+	Sold: 10, Remaining: 10
+	Price: $60.0, Profit $25.0
+	Tue Feb 06 08:25:30 MST 2018
+Splatoon 2, Nintendo Switch
+	Sold: 5, Remaining: 15
+	Price: $60.0, Profit $25.0
+	Thu Feb 08 08:37:51 MST 2018
+Nintendo Switch
+	Sold: 10, Remaining: 10
+	Price: $300.0, Profit $100.0
+	Mon Feb 12 07:55:49 MST 2018
+ARMS, Nintendo Switch
+	Sold: 10, Remaining: 15
+	Price: $40.0, Profit: $5.0
+	Mon Feb 12 08:10:43 MST 2018
+Super Mario Odyssey, Nintendo Switch
+	Sold: 10, Remaining: 0
+	Price: $60.0, Profit $20.0
+	Wed Feb 14 08:19:18 MST 2018

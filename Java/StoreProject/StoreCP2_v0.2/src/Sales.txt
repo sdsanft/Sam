@@ -11,3 +11,7 @@ Super Mario Odyssey, Nintendo Switch.
 	Sold: 10, Remaining: 10
 	Price: $60.0, Profit $20.0
 	Fri Feb 02 08:56:35 MST 2018
+The Legend of Zelda: Breath of the Wild, Nintendo Switch
+	Sold: 10, Remaining: 20
+	Price: $60.0, Profit $25.0
+	Tue Feb 06 07:48:17 MST 2018
