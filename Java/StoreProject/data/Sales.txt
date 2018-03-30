@@ -1,0 +1,32 @@
+Nintendo Switch
+	Sold: 10, Remaining: 10
+	Price: $300.0, Profit $100.0
+	Wed Feb 14 08:45:58 MST 2018
+PlayStation 4 Slim
+	Sold: 5, Remaining: 10
+	Price: $250.0, Profit: $10.0
+	Wed Feb 14 08:46:13 MST 2018
+Super Mario Odyssey, Nintendo Switch
+	Sold: 10, Remaining: 10
+	Price: $60.0, Profit $20.0
+	Wed Feb 14 08:46:26 MST 2018
+Splatoon 2, Nintendo Switch
+	Sold: 10, Remaining: 10
+	Price: $60.0, Profit $25.0
+	Wed Feb 14 08:46:35 MST 2018
+Horizon: Zero Dawn, PlayStation 4
+	Sold: 10, Remaining: 10
+	Price: $40.0, Profit: $5.0
+	Wed Feb 14 08:46:44 MST 2018
+ARMS, Nintendo Switch
+	Sold: 5, Remaining: 15
+	Price: $60.0, Profit $25.0
+	Wed Feb 14 08:46:51 MST 2018
+The Legend of Zelda: Breath of the Wild, Nintendo Switch
+	Sold: 20, Remaining: 0
+	Price: $60.0, Profit $25.0
+	Wed Feb 14 08:47:05 MST 2018
+Splatoon 2, Nintendo Switch
+	Sold: 10, Remaining: 30
+	Price: $60.0, Profit $25.0
+	Fri Mar 16 08:49:24 MDT 2018

@@ -14,11 +14,11 @@ public class head extends JPanel implements ActionListener {
 	JFrame frame;
 	JMenuBar menu;
 	JLabel label;
-	JButton button;
+	JButton button, button2;
 	JTextArea text;
-	JSplitPane splitPane, splitPane2;
-	JPanel bottomPane, topPane;
-	int i = 0;
+	JSplitPane splitPane, splitPane2, splitPane3;
+	JPanel bottomPane, topPane, rightPane;
+	static int i = 0;
 	
 	
 	public static void main(String[] args) {
@@ -40,22 +40,33 @@ public class head extends JPanel implements ActionListener {
 		label.setBackground(new Color(250, 250, 200));
 		label.setPreferredSize(new Dimension(300, 30));
 		label.setHorizontalAlignment(SwingConstants.CENTER);
+		label.setText("Good vs. Evil");
 		
 		button = new JButton();
 		button.setBackground(new Color(150, 150, 200));
-		button.setPreferredSize(new Dimension(100, 30));
-		button.setText("Button!");
+		button.setPreferredSize(new Dimension(100, 40));
+		button.setText("Good");
+		
+		button2 = new JButton();
+		button2.setBackground(new Color(150, 200, 200));
+		button2.setPreferredSize(new Dimension(100, 40));
+		button2.setText("Evil");
 		
 		button.addActionListener(this);
+		button2.addActionListener(this);
 		
 		text = new JTextArea ();
 		text.setOpaque(true);
 		text.setBackground(new Color(150, 200, 150));
-		text.setPreferredSize(new Dimension(200,60));
-		text.setText("Don't Press the Button");
+		text.setPreferredSize(new Dimension(200,80));
+		text.setText("Press a button to begin the game");
 		text.setEditable(false);
 		
-		splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, text, button);
+		splitPane3 = new JSplitPane(JSplitPane.VERTICAL_SPLIT, button, button2);
+		rightPane = new JPanel(new GridLayout(1, 0));
+		rightPane.add(splitPane3);
+		
+		splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, text, rightPane);
 		splitPane.setResizeWeight(0.5);
 		bottomPane = new JPanel(new GridLayout(1, 0));
 		bottomPane.add(splitPane);
@@ -70,7 +81,7 @@ public class head extends JPanel implements ActionListener {
 	
 	private static void createAndShowGUI() {
         //Create and set up the window.
-        JFrame frame = new JFrame("MultiListener");
+        JFrame frame = new JFrame("Good vs. Evil");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
  
         //Create and set up the content pane.
@@ -89,7 +100,13 @@ public class head extends JPanel implements ActionListener {
 		
 		JTextArea text = new JTextArea();
 		text.setPreferredSize(new Dimension(200,100));
-		text.setText("Button Presses: ");
+		if (i > 0) {
+			text.setText("Good is Winning\nGood: +" + i);
+		} else if (i < 0) {
+			text.setText("Evil is Winning\nEvil: " + i);
+		} else {
+			text.setText("Good and Evil are tied");
+		}
 		text.setEditable(false);
 		
 		frame.add(text);
@@ -99,22 +116,22 @@ public class head extends JPanel implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		i += 1;
-		System.out.println(i);
-		switch(i%4) {
-		case 1:
-			text.setText("I told you not to press the button.");
-			break;
-		case 2:
-			text.setText("You did it again!");
-			break;
-		case 3:
-			text.setText("I've given up.");
-			break;
-		case 0:
-			text.setText("Please don't press the button.");
-			break;
-		}
-		createAndShowGUI2();
+		if(e.getSource().equals(button)) {
+			i += 1;
+			if (i > 0)
+				text.setText("Good is rapidly advancing!\nGood: +" + i);
+			else if (i < 0)
+				text.setText("Evil reigns, but Good fights back!\nEvil: " + i);
+			else
+				text.setText("Good has tied the game.\nGood: +0\nEvil: -0");
+		} else if (e.getSource().equals(button2)) {
+			i -= 1;
+			if (i > 0)
+				text.setText("Good is losing ground!\nGood: +" + i);
+			else if (i < 0)
+				text.setText("Evil will prevail!\nEvil: " + i);
+			else
+				text.setText("Evil has tied the game.\nGood: +0\nEvil: -0");
+		}		
 	}
 }

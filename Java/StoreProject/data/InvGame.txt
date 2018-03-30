@@ -1,0 +1,45 @@
+Splatoon 2
+Nintendo Switch
+Nintendo
+Action
+35.0
+60.0
+40.0
+40
+..
+ARMS
+Nintendo Switch
+Nintendo
+Action
+35.0
+60.0
+40.0
+30
+..
+The Legend of Zelda: Breath of the Wild
+Nintendo Switch
+Nintendo
+Adventure
+35.0
+60.0
+40.0
+40
+..
+Xenoblade Chronicles 2
+Nintendo Switch
+Nintendo
+Role-Playing
+40.0
+60.0
+50.0
+230
+..
+Super Mario Odyssey
+Nintendo Switch
+Nintendo
+3D Platformer
+40.0
+60.0
+50.0
+30
+..
