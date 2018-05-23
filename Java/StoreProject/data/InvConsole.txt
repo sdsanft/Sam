@@ -4,13 +4,13 @@ Home
 240.0
 300.0
 250.0
-40
+30
 ..
 Nintendo Switch
 Nintendo
 Hybrid
 200.0
 300.0
-240.0
-50
+250.0
+40
 ..

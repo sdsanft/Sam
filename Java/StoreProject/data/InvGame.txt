@@ -16,6 +16,42 @@ Action
 40.0
 30
 ..
+Super Mario Odyssey
+Nintendo Switch
+Nintendo
+3D Platformer
+40.0
+60.0
+50.0
+40
+..
+Xenoblade Chronicles 2
+Nintendo Switch
+Nintendo
+Role-Playing Game
+40.0
+60.0
+50.0
+30
+..
+Horizon: Zero Dawn
+Playstation 4
+Guerilla Games
+Open-world Adventure
+40.0
+60.0
+50.0
+20
+..
+Mario Kart 8 Deluxe
+Nintendo Switch
+Nintendo
+Racing
+40.0
+60.0
+45.0
+10
+..
 The Legend of Zelda: Breath of the Wild
 Nintendo Switch
 Nintendo
@@ -24,22 +60,4 @@ Adventure
 60.0
 40.0
 40
-..
-Xenoblade Chronicles 2
-Nintendo Switch
-Nintendo
-Role-Playing
-40.0
-60.0
-50.0
-230
-..
-Super Mario Odyssey
-Nintendo Switch
-Nintendo
-3D Platformer
-40.0
-60.0
-50.0
-30
 ..

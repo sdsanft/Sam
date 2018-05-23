@@ -4,7 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Date;
 
-public class StoreObject {
+public abstract class StoreObject {
 	String itemName;
 	String shortName;
 	double storePrice;
@@ -20,8 +20,12 @@ public class StoreObject {
 		salePrice = argSale;
 		stock = argStock;
 		sellsFile = argFile;
-		if(itemName.length() <= 19)
+		if(itemName.length() <= 19) {
 			shortName = itemName;
+			for(int i = 0; i < (17-itemName.length()); i++) {
+				shortName += "  ";
+			}
+		}
 		else
 			shortName = itemName.substring(0, 18) + "...";
 	}
@@ -37,7 +41,8 @@ public class StoreObject {
 			else p.println("\tPrice: $" + retailPrice + ", Profit $" + (retailPrice - storePrice));
 			p.println("\t" + date.toString());
 			
-			System.out.println("Sold " + argStock + " copies of " + itemName);
+			//System.out.println("Sold " + argStock + " copies of " + itemName);
+			head.infoMessage("Sold " + argStock + " copies of " + itemName);
 			stock -= argStock;
 			f.close();
 			return true;

@@ -13,16 +13,19 @@ import javax.swing.*;
 
 public class head extends JPanel implements ActionListener {
 	private static final long serialVersionUID = 1L;
-	static JFrame frame, addFrame;
+	static JFrame frame, addFrame, sellFrame;
 	JLabel label, labelCustomer;
-	JButton button, button2, button3, button4, button5, buttonAdd, buttonRefresh;
+	JButton button, button2, button3, button4, button5, buttonAdd, buttonRefresh, buttonSell;
 	JTextArea text, textbox,
 			gameName, gameConsole, gameDeveloper, gameGenre, gameStoPri, gameRetPri, gameSalPri, gameQuantity,
 			consName, consDeveloper, consType, consStoPri, consRetPri, consSalPri, consQuantity;
 	JSplitPane splitPane, splitPane2, splitPane3, splitPane4, splitPane5, splitPaneCustomer, splitPaneWhole, splitPaneButtons;
 	JPanel bottomPane, topPane, rightPane1, rightPane2, rightPane3, customerPane, wholePane, buttonsPane;
+	ArrayList<JSplitPane> spSellItems;
+	ArrayList<JPanel> jpSellItems;
 	ArrayList<Game> InvGame;
 	ArrayList<Console> InvConsole;
+	ArrayList<JTextArea> sellItemsText;
 	File InvGameFile, InvGameBackup, InvConsoleFile, InvConsoleBackup, Sales, InvGameInput, InvConsoleInput;
 	
 	
@@ -190,16 +193,9 @@ public class head extends JPanel implements ActionListener {
 				}
 			}
 		}
-		for (int m = 0; m < inv.size(); m++) {
-			System.out.println(inv.get(m).itemName + "\t" + inv.get(m).console);
-		}
 		for(int i = indexes.size() - 1; i >= 0; i--) {
 			System.out.println(indexes.get(i));
-			System.out.println("Removing " +  inv.get((int) indexes.get(i)).itemName);
 			inv.remove((int) indexes.get(i));
-		}
-		for (int m = 0; m < inv.size(); m++) {
-			System.out.println(inv.get(m).itemName + "\t" + inv.get(m).console);
 		}
 		return (inv);
 	}
@@ -390,13 +386,13 @@ public class head extends JPanel implements ActionListener {
 		textbox.setBackground(new Color(250, 250, 200));
 		textbox.append("Games\tIn Stock\n");
 		for(int i = 0; i < InvGame.size(); i++) {
-			textbox.append("$" + InvGame.get(i).retailPrice + "\t" + InvGame.get(i).stock + "        " + InvGame.get(i).itemName + ":\n");
+			textbox.append("$" + InvGame.get(i).retailPrice + "/$" + InvGame.get(i).salePrice + "\t" + InvGame.get(i).stock + "        " + InvGame.get(i).itemName + ":\n");
 			if (InvGame.get(i).stock <= 0) textbox.append("\tNOT IN STOCK\n");
 			textbox.append("\t\tA(n) " + InvGame.get(i).genre + " game developed by " + InvGame.get(i).publisher + " for " + InvGame.get(i).console + "\n");
 		}
 		textbox.append("\nConsoles\tIn Stock\n");
 		for(int i = 0; i < InvConsole.size(); i++) {
-			textbox.append("$" + InvConsole.get(i).retailPrice + "\t" + InvConsole.get(i).stock + "        " + InvConsole.get(i).itemName + ":\n");
+			textbox.append("$" + InvConsole.get(i).retailPrice + "/$" + InvConsole.get(i).salePrice + "\t" + InvConsole.get(i).stock + "        " + InvConsole.get(i).itemName + ":\n");
 			if (InvConsole.get(i).stock <= 0) textbox.append("\tNOT IN STOCK\n");
 			textbox.append("\t\tA " + InvConsole.get(i).type + " console made by " + InvConsole.get(i).manufacturer + "\n");
 		}
@@ -432,8 +428,19 @@ public class head extends JPanel implements ActionListener {
 		textbox.append("\t===Sales===\n\n");
 		
 		fileScanner = new Scanner(Sales);
-		for (int i = 0; i < length; i++) {
-			textbox.append(fileScanner.nextLine() + "\n");
+		if (length > 40) {
+			for (int i = 0; i < length; i++) {
+				if (i < (length - 40)) {
+					fileScanner.nextLine();
+				} else {
+					textbox.append(fileScanner.nextLine() + "\n");
+				}
+			}
+			textbox.append("\nFor a complete view of sales please view " + Sales.getAbsolutePath());
+		} else {
+			for (int i = 0; i < length; i++) {
+				textbox.append(fileScanner.nextLine() + "\n");
+			}
 		}
 		fileScanner.close();
 		
@@ -449,62 +456,72 @@ public class head extends JPanel implements ActionListener {
 	public void addItems() {
 		addFrame = new JFrame("Print Inventory");
 		
-		JMenuBar menu = new JMenuBar ();
-		menu.setOpaque(true);
-		menu.setBackground(new Color(150, 200, 150));
-		menu.setPreferredSize(new Dimension(200, 50));
-		
 		gameName = new JTextArea();
 		gameName.setOpaque(true);
 		gameName.setBackground(new Color(220, 220, 220));
+		gameName.setBorder(BorderFactory.createLineBorder(Color.black));
 		gameConsole = new JTextArea();
 		gameConsole.setOpaque(true);
 		gameConsole.setBackground(new Color(200, 200, 200));
+		gameConsole.setBorder(BorderFactory.createLineBorder(Color.black));
 		gameDeveloper = new JTextArea();
 		gameDeveloper.setOpaque(true);
 		gameDeveloper.setBackground(new Color(220, 220, 220));
+		gameDeveloper.setBorder(BorderFactory.createLineBorder(Color.black));
 		gameGenre = new JTextArea();
 		gameGenre.setOpaque(true);
 		gameGenre.setBackground(new Color(200, 200, 200));
+		gameGenre.setBorder(BorderFactory.createLineBorder(Color.black));
 		gameStoPri = new JTextArea();
 		gameStoPri.setOpaque(true);
 		gameStoPri.setBackground(new Color(220, 220, 220));
+		gameStoPri.setBorder(BorderFactory.createLineBorder(Color.black));
 		gameRetPri = new JTextArea();
 		gameRetPri.setOpaque(true);
 		gameRetPri.setBackground(new Color(200, 200, 200));
+		gameRetPri.setBorder(BorderFactory.createLineBorder(Color.black));
 		gameSalPri = new JTextArea();
 		gameSalPri.setOpaque(true);
 		gameSalPri.setBackground(new Color(220, 220, 220));
+		gameSalPri.setBorder(BorderFactory.createLineBorder(Color.black));
 		gameQuantity = new JTextArea();
 		gameQuantity.setOpaque(true);
 		gameQuantity.setBackground(new Color(200, 200, 200));
+		gameQuantity.setBorder(BorderFactory.createLineBorder(Color.black));
 		
 		consName = new JTextArea();
 		consName.setOpaque(true);
 		consName.setBackground(new Color(220, 220, 220));
+		consName.setBorder(BorderFactory.createLineBorder(Color.black));
 		consDeveloper = new JTextArea();
 		consDeveloper.setOpaque(true);
 		consDeveloper.setBackground(new Color(200, 200, 200));
+		consDeveloper.setBorder(BorderFactory.createLineBorder(Color.black));
 		consType = new JTextArea();
 		consType.setOpaque(true);
 		consType.setBackground(new Color(220, 220, 220));
+		consType.setBorder(BorderFactory.createLineBorder(Color.black));
 		consStoPri = new JTextArea();
 		consStoPri.setOpaque(true);
 		consStoPri.setBackground(new Color(200, 200, 200));
+		consStoPri.setBorder(BorderFactory.createLineBorder(Color.black));
 		consRetPri = new JTextArea();
 		consRetPri.setOpaque(true);
 		consRetPri.setBackground(new Color(220, 220, 220));
+		consRetPri.setBorder(BorderFactory.createLineBorder(Color.black));
 		consSalPri = new JTextArea();
 		consSalPri.setOpaque(true);
 		consSalPri.setBackground(new Color(200, 200, 200));
+		consSalPri.setBorder(BorderFactory.createLineBorder(Color.black));
 		consQuantity = new JTextArea();
 		consQuantity.setOpaque(true);
 		consQuantity.setBackground(new Color(220, 220, 220));
+		consQuantity.setBorder(BorderFactory.createLineBorder(Color.black));
 		
 		JTextArea gamesHeader = new JTextArea();
 		gamesHeader.setOpaque(true);
 		gamesHeader.setBackground(new Color(250, 250, 200));
-		gamesHeader.setText("===Games===\n"
+		gamesHeader.setText("            ===Games===\n"
 				+ "Input data in the following format:\n"
 				+ "Game Name\n"
 				+ "Console\n"
@@ -519,7 +536,7 @@ public class head extends JPanel implements ActionListener {
 		JTextArea consolesHeader = new JTextArea();
 		consolesHeader.setOpaque(true);
 		consolesHeader.setBackground(new Color(250, 250, 200));
-		consolesHeader.setText("===Consoles===\n"
+		consolesHeader.setText("            ===Consoles===\n"
 				+ "Input data in the following format:\n"
 				+ "Console Name\n"
 				+ "Console Developer\n"
@@ -536,63 +553,37 @@ public class head extends JPanel implements ActionListener {
 		
 		buttonAdd.addActionListener(this);
 		
-		JSplitPane game1, game2, game3, game4, game5, game6, game7, cons1, cons2, cons3, cons4, cons5, cons6;
-		JPanel gpane1, gpane2, gpane3, gpane4, gpane5, gpane6, gpane7, cpane1, cpane2, cpane3, cpane4, cpane5, cpane6;
+		JPanel addGamesPanel = new JPanel(new GridLayout(8,1));
+		JPanel addConsolesPanel = new JPanel(new GridLayout(7,1));
 		
-		gpane1 = new JPanel(new GridLayout(1,0));
-		gpane2 = new JPanel(new GridLayout(1,0));
-		gpane3 = new JPanel(new GridLayout(1,0));
-		gpane4 = new JPanel(new GridLayout(1,0));
-		gpane5 = new JPanel(new GridLayout(1,0));
-		gpane6 = new JPanel(new GridLayout(1,0));
-		gpane7 = new JPanel(new GridLayout(1,0));
-		cpane1 = new JPanel(new GridLayout(1,0));
-		cpane2 = new JPanel(new GridLayout(1,0));
-		cpane3 = new JPanel(new GridLayout(1,0));
-		cpane4 = new JPanel(new GridLayout(1,0));
-		cpane5 = new JPanel(new GridLayout(1,0));
-		cpane6 = new JPanel(new GridLayout(1,0));
+		addGamesPanel.add(gameName);
+		addGamesPanel.add(gameConsole);
+		addGamesPanel.add(gameDeveloper);
+		addGamesPanel.add(gameGenre);
+		addGamesPanel.add(gameStoPri);
+		addGamesPanel.add(gameRetPri);
+		addGamesPanel.add(gameSalPri);
+		addGamesPanel.add(gameQuantity);
 		
-		game1 = new JSplitPane(JSplitPane.VERTICAL_SPLIT, gameName, gameConsole);
-		game2 = new JSplitPane(JSplitPane.VERTICAL_SPLIT, gameDeveloper, gameGenre);
-		game3 = new JSplitPane(JSplitPane.VERTICAL_SPLIT, gameStoPri, gameRetPri);
-		game4 = new JSplitPane(JSplitPane.VERTICAL_SPLIT, gameSalPri, gameQuantity);
-		cons1 = new JSplitPane(JSplitPane.VERTICAL_SPLIT, consName, consDeveloper);
-		cons2 = new JSplitPane(JSplitPane.VERTICAL_SPLIT, consType, consStoPri);
-		cons3 = new JSplitPane(JSplitPane.VERTICAL_SPLIT, consRetPri, consSalPri);
-		gpane1.add(game1);
-		gpane2.add(game2);
-		gpane3.add(game3);
-		gpane4.add(game4);
-		cpane1.add(cons1);
-		cpane2.add(cons2);
-		cpane3.add(cons3);
+		addConsolesPanel.add(consName);
+		addConsolesPanel.add(consDeveloper);
+		addConsolesPanel.add(consType);
+		addConsolesPanel.add(consStoPri);
+		addConsolesPanel.add(consRetPri);
+		addConsolesPanel.add(consSalPri);
+		addConsolesPanel.add(consQuantity);
+
+		JPanel gPane = new JPanel(new GridLayout(2, 1));
+		gPane.add(gamesHeader);
+		gPane.add(addGamesPanel);
 		
-		game5 = new JSplitPane(JSplitPane.VERTICAL_SPLIT, gpane1, gpane2);
-		game6 = new JSplitPane(JSplitPane.VERTICAL_SPLIT, gpane3, gpane4);
-		cons4 = new JSplitPane(JSplitPane.VERTICAL_SPLIT, cpane1, cpane2);
-		cons5 = new JSplitPane(JSplitPane.VERTICAL_SPLIT, cpane3, consQuantity);
-		gpane5.add(game5);
-		gpane6.add(game6);
-		cpane4.add(cons4);
-		cpane5.add(cons5);
+		JPanel cPane = new JPanel(new GridLayout(2, 1));
+		cPane.add(consolesHeader);
+		cPane.add(addConsolesPanel);
 		
-		game7 = new JSplitPane(JSplitPane.VERTICAL_SPLIT, gpane5, gpane6);
-		cons6 = new JSplitPane(JSplitPane.VERTICAL_SPLIT, cpane4, cpane5);
-		gpane7.add(game7);
-		cpane6.add(cons6);
-		
-		JSplitPane gamePane = new JSplitPane(JSplitPane.VERTICAL_SPLIT, gamesHeader, gpane7);
-		JPanel gPane = new JPanel(new GridLayout(1, 0));
-		gPane.add(gamePane);
-		
-		JSplitPane consPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT, consolesHeader, cpane6);
-		JPanel cPane = new JPanel(new GridLayout(1, 0));
-		cPane.add(consPane);
-		
-		JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, gPane, cPane);
-		JPanel Pane = new JPanel(new GridLayout(1, 0));
-		Pane.add(splitPane);
+		JPanel Pane = new JPanel(new GridLayout(1, 2));
+		Pane.add(gPane);
+		Pane.add(cPane);
 		
 		JSplitPane fullSplitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT, Pane, buttonAdd);
 		JPanel fullPane = new JPanel(new GridLayout(1, 0));
@@ -605,7 +596,69 @@ public class head extends JPanel implements ActionListener {
 	}
 	
 	public void sellItems() {
+		sellFrame = new JFrame("Sell Items");
 		
+		sellItemsText = new ArrayList<JTextArea>();
+		
+		sellItemsText.add(new JTextArea("\tSell Items"));
+		sellItemsText.add(new JTextArea("========Games========"));
+		sellItemsText.add(new JTextArea("========Consoles========"));
+				
+		for (int i = 0; i < 3; i++)
+			sellItemsText.get(i).setBackground(new Color(250, 250, 200));
+		
+		for(int i = 0; i < InvGame.size(); i++) {
+			sellItemsText.get(1).append("\n" + (i + 1) + ")   " + InvGame.get(i).shortName + ", " + InvGame.get(i).console + "\tQuantity: " + InvGame.get(i).stock);
+		}
+		for(int i = 0; i < InvConsole.size(); i++) {
+			sellItemsText.get(2).append("\n" + (i + 1) + ")   " + InvConsole.get(i).itemName + "\tQuantity: " + InvConsole.get(i).stock);
+		}
+		sellItemsText.get(0).setEditable(false);
+		sellItemsText.get(1).setEditable(false);
+		sellItemsText.get(2).setEditable(false);
+		
+		sellItemsText.add(new JTextArea("Game Index Number"));
+		sellItemsText.add(new JTextArea("Quantity"));
+		sellItemsText.add(new JTextArea("On Sale? (y or n)"));
+		sellItemsText.add(new JTextArea("Console Index Number"));
+		sellItemsText.add(new JTextArea("Quantity"));
+		sellItemsText.add(new JTextArea("On Sale? (y or n)"));
+		
+		for(int i = 3; i < 7; i += 3) {
+			sellItemsText.get(i).setBackground(new Color(220, 220, 220));
+			sellItemsText.get(i + 1).setBackground(new Color(200, 200, 200));
+			sellItemsText.get(i + 2).setBackground(new Color(220, 220, 220));
+		}
+		
+		buttonSell = new JButton();
+		buttonSell.setText("Sell Items");
+		buttonSell.setBackground(new Color(150, 200, 150));
+		buttonSell.addActionListener(this);
+		
+		jpSellItems = new ArrayList<JPanel>();
+		spSellItems = new ArrayList<JSplitPane>();
+		
+		for(int i = 0; i < 9; i++) {
+			jpSellItems.add(new JPanel(new GridLayout(1, 0)));
+		}
+		
+			spSellItems.add(new JSplitPane(JSplitPane.VERTICAL_SPLIT, sellItemsText.get(3), sellItemsText.get(4)));
+			spSellItems.add(new JSplitPane(JSplitPane.VERTICAL_SPLIT, jpSellItems.get(0), sellItemsText.get(5)));
+			spSellItems.add(new JSplitPane(JSplitPane.VERTICAL_SPLIT, sellItemsText.get(6), sellItemsText.get(7)));
+			spSellItems.add(new JSplitPane(JSplitPane.VERTICAL_SPLIT, jpSellItems.get(2), sellItemsText.get(8)));
+			spSellItems.add(new JSplitPane(JSplitPane.VERTICAL_SPLIT, sellItemsText.get(1), jpSellItems.get(1)));
+			spSellItems.add(new JSplitPane(JSplitPane.VERTICAL_SPLIT, sellItemsText.get(2), jpSellItems.get(3)));
+			spSellItems.add(new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, jpSellItems.get(4), jpSellItems.get(5)));
+			spSellItems.add(new JSplitPane(JSplitPane.VERTICAL_SPLIT, sellItemsText.get(0), jpSellItems.get(6)));
+			spSellItems.add(new JSplitPane(JSplitPane.VERTICAL_SPLIT, jpSellItems.get(7), buttonSell));
+		
+		for(int i = 0; i < 9; i++) {
+			jpSellItems.get(i).add(spSellItems.get(i));
+		}
+		
+		sellFrame.add(jpSellItems.get(8));
+		sellFrame.pack();
+		sellFrame.setVisible(true);
 	}
 	
 	/*
@@ -728,7 +781,6 @@ public class head extends JPanel implements ActionListener {
 		
 		button4 = new JButton();
 		button4.setBackground(new Color(130, 200, 170));
-		button4.setPreferredSize(new Dimension(200, 30));
 		button4.setText("Save");
 		
 		button5 = new JButton();
@@ -759,39 +811,55 @@ public class head extends JPanel implements ActionListener {
 		}
 		text.setEditable(false);
 		
-		splitPane3 = new JSplitPane(JSplitPane.VERTICAL_SPLIT, button, button2);
-		rightPane1 = new JPanel(new GridLayout(1, 0));
-		rightPane1.add(splitPane3);
+		rightPane3 = new JPanel(new GridLayout(4, 1));
+		rightPane3.add(button);
+		rightPane3.add(button2);
+		rightPane3.add(button3);
+		rightPane3.add(button5);
 		
-		splitPane4 = new JSplitPane(JSplitPane.VERTICAL_SPLIT, button3, button5);
-		rightPane2 = new JPanel(new GridLayout(1, 0));
-		rightPane2.add(splitPane4);
+		bottomPane = new JPanel(new GridLayout(1, 2));
+		bottomPane.add(text);
+		bottomPane.add(rightPane3);
+				
+		buttonsPane = new JPanel(new GridLayout(1, 2));
+		buttonsPane.add(button4);
+		buttonsPane.add(buttonRefresh);
 		
-		splitPane5 = new JSplitPane(JSplitPane.VERTICAL_SPLIT, rightPane1, rightPane2);
-		rightPane3 = new JPanel(new GridLayout(1, 0));
-		rightPane3.add(splitPane5);
+		splitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT, label, bottomPane);
+		topPane = new JPanel(new GridLayout(1,0));
+		topPane.add(splitPane);
 		
-		splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, text, rightPane3);
-		splitPane.setResizeWeight(0.5);
-		bottomPane = new JPanel(new GridLayout(1, 0));
-		bottomPane.add(splitPane);
-		
-		splitPane2 = new JSplitPane(JSplitPane.VERTICAL_SPLIT, label, bottomPane);
-		topPane = new JPanel(new GridLayout(1, 0));
-		topPane.add(splitPane2);
-		
-		splitPaneButtons = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, button4, buttonRefresh);
-		buttonsPane = new JPanel(new GridLayout(1, 0));
-		buttonsPane.add(splitPaneButtons);
-		
-		splitPaneWhole = new JSplitPane(JSplitPane.VERTICAL_SPLIT, topPane, buttonsPane);
-		wholePane = new JPanel(new GridLayout(1, 0));
-		wholePane.add(splitPaneWhole);
-		
+		splitPane2 = new JSplitPane(JSplitPane.VERTICAL_SPLIT, topPane, buttonsPane);
+			
 		
 		//setMenuPanel(menu);
-		add(wholePane);
+		add(splitPane2);
 	}
+	
+	public static void errorMessage(String message) {
+		JFrame errorFrame = new JFrame("Error");
+		
+		JTextArea text = new JTextArea (message);
+		text.setBackground(new Color (200, 150, 150));
+		text.setEditable(false);
+		
+		errorFrame.add(text);
+		errorFrame.pack();
+		errorFrame.setVisible(true);
+	}
+	
+	public static void infoMessage(String message) {
+		JFrame errorFrame = new JFrame("Info");
+		
+		JTextArea text = new JTextArea (message);
+		text.setBackground(new Color (150, 200, 150));
+		text.setEditable(false);
+		
+		errorFrame.add(text);
+		errorFrame.pack();
+		errorFrame.setVisible(true);
+	}
+	
 	
 	
 	private static void showEmployeeGUI() throws IOException {
@@ -815,6 +883,8 @@ public class head extends JPanel implements ActionListener {
 			printInventory();
 		} else if (e.getSource().equals(button5)) {
 			addItems();
+		} else if (e.getSource().equals(button3)) {
+			sellItems();
 		} else if(e.getSource().equals(button2)) {
 			try {
 				printSales();
@@ -860,7 +930,78 @@ public class head extends JPanel implements ActionListener {
 			}
 			
 			addFrame.dispose();
+			
+			try {
+				SaveFile(InvGameFile, InvGame);
+				SaveFileConsole(InvConsoleFile, InvConsole);
+				frame.dispose();
+				showEmployeeGUI();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		} else if (e.getSource().equals(buttonRefresh)){	
+			try {
+				SaveFile(InvGameFile, InvGame);
+				SaveFileConsole(InvConsoleFile, InvConsole);
+				frame.dispose();
+				showEmployeeGUI();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		} else if (e.getSource().equals(buttonSell)) {
+			try {
+				if (Integer.parseInt(sellItemsText.get(3).getText()) <= InvGame.size() && Integer.parseInt(sellItemsText.get(3).getText()) > 0) {
+					int index = Integer.parseInt(sellItemsText.get(3).getText()) - 1;
+					if (Integer.parseInt(sellItemsText.get(4).getText()) <= InvGame.get(index).stock) {
+						int quant = Integer.parseInt(sellItemsText.get(4).getText());
+						if (sellItemsText.get(5).getText().equals("y")) {
+							InvGame.get(index).sell(quant, true, new Date());
+						} else if (sellItemsText.get(5).getText().equals("n")) {
+							InvGame.get(index).sell(quant, false, new Date());
+						} else {
+							errorMessage("Sell Game: Please state whether the game is on sale or not by typing 'y' or 'n' in the appropriate box");
+						}
+					} else {
+						errorMessage("Sell Game: There are not enough items in stock");
+					}
+				} else {
+					errorMessage("Sell Game: An invalid index number was given.");
+				}
+			} catch (NumberFormatException e1) {
+				errorMessage("Sell Game: A number was not provided in the appropriate box");
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			
+			try {
+				if (Integer.parseInt(sellItemsText.get(6).getText()) <= InvConsole.size()) {
+					int index = Integer.parseInt(sellItemsText.get(6).getText()) - 1;
+					if (Integer.parseInt(sellItemsText.get(7).getText()) <= InvConsole.get(index).stock) {
+						int quant = Integer.parseInt(sellItemsText.get(7).getText());
+						if (sellItemsText.get(8).getText().equals("y")) {
+							InvConsole.get(index).sell(quant, true, new Date());
+						} else if (sellItemsText.get(8).getText().equals("n")) {
+							InvConsole.get(index).sell(quant, false, new Date());
+						} else {
+							errorMessage("Sell Console: Please type 'y' or 'n'");
+						}
+					} else {
+						errorMessage("Sell Console: There are not enough items in stock");
+					}
+				} else {
+					errorMessage("Sell Console: An invalid index number was given.");
+				}
+			} catch (NumberFormatException e1) {
+				errorMessage("Sell Console: A number was not provided in the appropriate box");
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			sellFrame.dispose();
+			
 			try {
 				SaveFile(InvGameFile, InvGame);
 				SaveFileConsole(InvConsoleFile, InvConsole);
